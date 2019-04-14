@@ -1,0 +1,67 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication30;
+
+import java.util.Scanner;
+
+
+
+
+public class ParkingFee  {
+
+    public static void main(String args[]){
+    Scanner s=  new Scanner(System.in);
+    String pname[];
+    int n;
+    int[] bt;
+    System.out.println("Enter total number of processes:");
+    n = s.nextInt();
+    System.out.println("Enter process one by one");
+    pname = new String[n];
+    bt  =new int[n];
+    for(int i=0;i<n;i++){
+        System.out.println("Enter name of the procss=");
+        pname[i]= s.next();
+        System.out.println("Enter burst time of the process=");
+        bt[i]=s.nextInt();
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n-1;j++){
+            if(bt[j]<bt[j+1]){
+                int temp=bt[j];
+                bt[j]=bt[j+1];
+                bt[j+1]=bt[j];
+                String tmpn = pname[j];
+                pname[j]=pname[j+1];
+                pname[j+1]=tmpn;
+            }
+        }
+    }
+    System.out.println("Enter quantum of the processes=");
+    int quntum = s.nextInt();
+    String[] qarr  =new String[10];
+    for(int i=0;i<n;i++){
+        if(bt[i]>0){
+            for(int j=0;j<10;j++){
+                if(bt[i]>0){
+                    qarr[j]=pname[i];
+                    bt[i]=bt[i]-quntum;
+                    j=i+quntum-1;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+    }
+    for(int i=0;i<10;i++){
+        if(qarr[i]!=null)
+        System.out.print(qarr[i]+" | ");
+    }
+    
+    }
+
+}

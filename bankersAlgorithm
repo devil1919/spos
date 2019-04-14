@@ -1,0 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication30;
+
+import java.util.Scanner;
+
+
+
+
+public class ParkingFee  {
+
+    public static void main(String args[]){
+      Scanner s =new Scanner(System.in);
+      String[] pname;
+      int[][] aloc,max,need;
+      int[] avl,result;
+      int np,nr;
+      System.out.println("Enter total number of proceses:");
+      np = s.nextInt();
+      System.out.println("Enter total number of resources:");
+      nr = s.nextInt();
+      avl =new int[nr];
+      result =new int[np];
+      for(int i=0;i<np;i++){
+          result[i]=0;
+      }
+      pname = new String[np];
+      aloc = new int[np][nr];
+      max = new int[np][nr];
+      need = new int[np][nr];
+      for(int i=0;i<np;i++){
+          System.out.println("Enter name of process:");
+          pname[i] = s.next();
+          for(int j=0;j<nr;j++){
+              System.out.println("Enter allocation of resourse" + j +"=");
+              aloc[i][j] = s.nextInt();
+              System.out.println("Enter max allocation of resourse" + j +"=");
+              max[i][j] = s.nextInt();
+              need[i][j] = max[i][j]-aloc[i][j];
+          }
+      }
+      System.out.println("enter available resourses");
+      for(int i=0;i<nr;i++){
+          System.out.println("Resouse "+i+"=");
+          avl[i] =s.nextInt();
+      }
+      int a=0;
+      for(int k=0;k<np;k++){
+      for(int i=0;i<np;i++){
+          if(result[i]!=1){
+              for(int j=0;j<nr;j++){
+              if(need[i][j]<=avl[j]){
+                  a++;
+              }
+          }
+          if(a==nr){
+              a=0;
+             for(int j=0;j<nr;j++){
+                 avl[j] = avl[j]+aloc[i][j];
+               
+             }
+               result[i]=1;
+                 System.out.println(pname[i]);
+          }
+          else{
+              a=0;
+          }
+          }
+          
+      }
+      }
+      
+    }
+
+}

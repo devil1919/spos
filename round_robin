@@ -1,0 +1,56 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication30;
+
+import java.util.Scanner;
+
+
+
+
+public class ParkingFee  {
+
+    public static void main(String args[]){
+       String[] pname;
+       int n,quantum;
+       int[] bt;
+     
+       int[] ptrd = new int[100];
+       String[] ptrnd =new String[100];
+       Scanner s =  new Scanner(System.in);
+       System.out.println("Enter total number of processes:");
+       n = s.nextInt();
+       pname= new String[n];
+       bt = new int[n];
+       System.out.println("Enter processes data one by one");
+      for(int i=0;i<n;i++){
+          System.out.println("Enter process name:");
+          pname[i] = s.next();
+          System.out.println("Enter burst time of process:");
+          bt[i] = s.nextInt();
+      }
+      System.out.println("Enter quantum of the prcesses:");
+      quantum = s.nextInt();
+      for(int i=0;i<n;i++){
+          if(bt[i]!=0){
+              for(int j=i;j<10;j++){
+                  if(bt[i]>0){
+                  ptrnd[j] =pname[i] ;
+                  bt[i]=bt[i]-quantum;
+                  j=j+quantum-1;
+                  
+                  }
+                  else{
+                      break;
+                  }
+              }
+          }
+      }
+      for(int i=0;i<10;i++){
+          System.out.println(ptrnd[i]);
+      }
+    }
+
+}

@@ -1,0 +1,37 @@
+%{
+	#include<stdio.h>
+	#include<stdlib.h>
+
+%}
+%token ID PUBLIC PROTECTED PRIVATE INT FLOAT NUM FNUM EQ LONG DOUBLE STRING
+%token '='
+%%
+
+S 	:st {printf("Input accepted"); exit(0);}
+
+st   :E1 ';'
+	  | E ';'
+
+E     : INT ID
+	| FLOAT ID
+	| DOUBLE ID
+	| INT ID EQ NUM
+	| FLOAT ID EQ FNUM
+	| CHAR ID EQ AL
+	;
+E2	:PRIVATE E
+	| PUBLIC E
+	| PROTECTED E
+	;
+%%
+#include "lex.yy.c"
+void main(){
+	printf("Enter exprssion:");
+	yyparse();
+}
+int yywrap(){
+	retrun(1);
+}
+yyerror(){
+	printf("Parse Error");
+}
